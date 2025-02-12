@@ -5,12 +5,14 @@ import lottieGo from "./assets/lotties/triviaGO.json"
 import lottieThinking from "./assets/lotties/triviathink.json"
 import { IoSettingsOutline } from "react-icons/io5";
 import { PiRanking } from "react-icons/pi"
+import { Settings } from "./components/settings"
 
 
 function App() {
   
 
   const [stepPage, setstepPage] = useState(1)
+  const [modalInfo, setmodalInfo] = useState(false)
 
   useEffect(() => {
     const text = document.querySelector(".typing-text")
@@ -35,7 +37,12 @@ function App() {
   const handleStep = () =>{
     setstepPage(stepPage + 1);
   };
-  
+
+
+  const handlemodalInfo = () =>{
+    setmodalInfo(true);
+
+  };
 
   return (
     <div className="min-h-screen flex w-full items-center justify-center text-center
@@ -81,7 +88,7 @@ function App() {
               
               </div>
               <div className="flex flex-col justify-center items-center gap-1
-              cursor-pointer"> 
+              cursor-pointer " onClick={handlemodalInfo}> 
                 <IoSettingsOutline size ={30} 
                 />
                 <div>Settings</div>
@@ -97,6 +104,8 @@ function App() {
             </>
           )
         }
+    
+    <Settings modalInfo ={modalInfo} setModalInfo={setmodalInfo}/>
     </div>    
   )
 }
