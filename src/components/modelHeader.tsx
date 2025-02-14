@@ -15,7 +15,7 @@ export const ModelHeader = ({onClose, title} : {
 
             </button>
 
-            <span>{title}</span>
+            <span className="font-bold text-xl">{title}</span>
         </div>
 
     )
