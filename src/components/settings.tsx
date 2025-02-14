@@ -1,4 +1,4 @@
-import { SetStateAction, useState} from "react"
+import { SetStateAction} from "react"
 import { Model } from "./model"
 import { ModelHeader } from "./modelHeader"
 import { categories } from "../utils/categories"
@@ -6,19 +6,29 @@ import { categories } from "../utils/categories"
 
 type SettingsProps = {
     modalInfo: boolean
-    setModalInfo: (value:
-        SetStateAction<boolean>) => void
+    setModalInfo: (value:SetStateAction<boolean>) => void;
+        category: number;
+        setCategory:(value:SetStateAction<number>) => void;
+        numberOfQuestions: number;
+        setNumberOfQuestions:(value:SetStateAction<number>) => void;
+        difficulty : string;
+        setDifficulty: (value:SetStateAction<string>) => void;
+        type : string;
+        setType: (value:SetStateAction<string>) => void;
 }
 
-export const Settings = ({
-    modalInfo,
-    setModalInfo
-
+export const Settings = ({ modalInfo ,
+    setModalInfo ,
+    category,
+    setCategory,
+    numberOfQuestions,
+    setNumberOfQuestions,
+    difficulty,
+    setDifficulty,
+    type,
+    setType,
 }: SettingsProps) => {
-    const [category, setCategory] = useState(0)
-    const [numberOfQuestions, setNumberOfQuestions] = useState(5)
-    const [difficulty, setDifficulty] = useState("any")
-    const [type, setType] = useState("any")
+    
 
     const totalOfQuestions = [5,10,15,20];
     const difficulties =["Easy", "Medium", "Hard"]
@@ -26,6 +36,10 @@ export const Settings = ({
     //to make first letter capital on the select bar strings or anything
     const capitalizeFirstLetter = (string: string) =>{
         return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    const SaveSettings = () =>{
+        setModalInfo(false);
     }
     
     return (
@@ -99,7 +113,7 @@ export const Settings = ({
                     </label>
                     <label className="w-full">
                         <span className="block mb-2 text-gray-700">
-                            Type
+                            Type of Difficulty
                         </span>
                         <select 
                             value={type} 
@@ -123,7 +137,7 @@ export const Settings = ({
                     </label>
 
                     <button className="bg-blue-500 w-full py-2 rounded-lg text-white
-                    hover:bg-blue-800">
+                    hover:bg-blue-800 " onClick={SaveSettings}>
                         Save Settings
                     </button>
 
