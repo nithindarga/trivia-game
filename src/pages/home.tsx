@@ -1,18 +1,23 @@
-import Lottie from "lottie-react"
-import lottieOpen from "../assets/lotties/triviaopening.json"
-import { useEffect, useState } from "react"
-import lottieGo from "../assets/lotties/triviaGO.json"
-import lottieThinking from "../assets/lotties/triviathink.json"
+import Lottie from "lottie-react";
+import lottieOpen from "../assets/lotties/triviaopening.json";
+import lottieGo from "../assets/lotties/triviaGO.json";
+import lottieGoing from "../assets/lotties/triviagoing.json";
+import lottieThinking from "../assets/lotties/triviathink.json";
 import { IoSettingsOutline } from "react-icons/io5";
-import { PiRanking } from "react-icons/pi"
-import { Settings } from "../components/settings"
-import { useNavigate } from "react-router-dom"
+
+import { useEffect, useState } from "react";
+import { PiRanking } from "react-icons/pi";
+import { Settings } from "../components/settings";
+import { useNavigate } from "react-router-dom";
+import { Rank } from "../components/rank";
 
 
 export const HomePage =() => {
-    const [stepPage, setstepPage] = useState(1)
-    const [modalInfo, setmodalInfo] = useState(false)
+    const [stepPage, setStepPage] = useState(1)
+    const [modalInfo, setModalInfo] = useState(false)
+    const [rankModalInfo, setRankModalInfo] = useState(false)
     const navigate= useNavigate()
+    const [firstAnimation, setFirstAnimation] = useState(1)
 
     const [category, setCategory] = useState(0)
     const [numberOfQuestions, setNumberOfQuestions] = useState(5)
@@ -40,21 +45,26 @@ export const HomePage =() => {
     }, [])
   
     const handleStep = () =>{
-      setstepPage(stepPage + 1);
+      setStepPage(stepPage + 1);
     };
   
   
-    const handlemodalInfo = () =>{
-      setmodalInfo(true);
+    const handleModalInfo = () =>{
+      setModalInfo(true);
+  
+    };
+    const handleRankModal = () =>{
+      setRankModalInfo(true);
   
     };
     const handleStartGame = async () =>{
+        setFirstAnimation(2)
         const params = new URLSearchParams();
         params.append("amount",numberOfQuestions.toString())
 
         if (category !==0) params.append("category", category.toString())
-        if (difficulty !=="any")params.append("difficulty", difficulty.toString())
-        if (type !=="any")params.append("type", type.toString())
+        if (difficulty !=="any")params.append("difficulty", difficulty)
+        if (type !=="any")params.append("type", type )
         
         const url = `https://opentdb.com/api.php?${params.toString()}`
 
@@ -91,10 +101,6 @@ export const HomePage =() => {
       <div className="min-h-screen flex w-full items-center justify-center text-center
       bg-gradient-to-r from-blue-900 to to-blue-600 
       relative">
-        
-  
-  
-  
           {
             stepPage === 1 &&(
               <div>
@@ -124,14 +130,15 @@ export const HomePage =() => {
               flex flex-row items-center justify-between px-6
               text-white">
                 <div className="flex flex-col justify-center items-center gap-1
-                cursor-pointer">
+                cursor-pointer" onClick={handleRankModal}>
                   <PiRanking size ={30} 
                   />
                   <div>Rank</div>
                 
                 </div>
                 <div className="flex flex-col justify-center items-center gap-1
-                cursor-pointer " onClick={handlemodalInfo}> 
+                cursor-pointer " 
+                onClick={handleModalInfo}> 
                   <IoSettingsOutline size ={30} 
                   />
                   <div>Settings</div>
@@ -140,8 +147,21 @@ export const HomePage =() => {
   
               </div>
               <div className="cursor-pointer" onClick={handleStartGame}>
-                <Lottie animationData={lottieThinking} loop={true}
-                className="w-96"/>
+                {
+                  firstAnimation === 1 ?
+                  <Lottie 
+                    animationData={lottieThinking} 
+                    loop={true}
+                    className="w-96"
+                  /> :
+                  <Lottie 
+                    animationData={lottieGoing} 
+                    loop={true}
+                    className="w-96"
+                  />
+
+                }
+                
                 <div  className="text-3xl font-bold text-white">
                     Click to start</div>
               </div>
@@ -150,7 +170,7 @@ export const HomePage =() => {
           }
       
       <Settings modalInfo ={modalInfo} 
-        setModalInfo={setmodalInfo} 
+        setModalInfo={setModalInfo} 
         category={category} 
         difficulty={difficulty}
         numberOfQuestions={numberOfQuestions} setCategory={setCategory} 
@@ -158,6 +178,9 @@ export const HomePage =() => {
         setNumberOfQuestions={setNumberOfQuestions} setType={setType} 
         type={type}
       />
+
+      <Rank modalInfo={rankModalInfo}
+      setModalInfo={setRankModalInfo} /> 
       </div>    
     )
 }
