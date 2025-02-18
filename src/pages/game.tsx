@@ -17,7 +17,7 @@ export function GamePage (){
     const [currentQuestionIndex , setCurrentQuestionIndex] = useState(0);
     const [answers,setAnswers] = useState<string[]>([]);
     const [selectedAnswer, setSelectedAnswer] = useState("")
-    const [answerResult, setAnswerResult] = useState<"success" |"failure" | null>(null)
+    const [answerResult, setAnswerResult] = useState<"success" |"failure" | null>(null);
 
     useEffect(() => {
       if (questions && questions.length > 0){
@@ -170,7 +170,8 @@ export function GamePage (){
                               
 
                               return(
-                                <button  key={index} onClick={() => handleSelectedAnswer(answer)} 
+                                <button  key={index} 
+                                onClick={() => handleSelectedAnswer(answer)} 
                                 className={` rounded-lg py-3 ${buttonClass}`}
                                 >
 
@@ -181,7 +182,8 @@ export function GamePage (){
                           </div>
 
                           <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 
-                          rounded-md" onClick={handleConfirmAnswer} >
+                          rounded-md" 
+                          onClick={handleConfirmAnswer} >
                             Confirm
                           </button>
 
@@ -203,10 +205,7 @@ export function GamePage (){
                               </div>
                             )
                           }
-
-
-                          
-                          
+           
                           
         </div>
     )
