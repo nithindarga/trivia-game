@@ -70,7 +70,7 @@ export function Rank ({ modalInfo , setModalInfo }: RankProps) {
                 {lastGames.length === 0 ? (
                     "No Games Played"
                 ) : (
-                    <table className="w-full text-left">
+                    <table className="w-full text-centre">
                         <thead>
                             <tr>
                                 <th className="p-2">Date</th>

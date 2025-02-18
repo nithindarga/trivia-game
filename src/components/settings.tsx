@@ -31,7 +31,7 @@ export const Settings = ({ modalInfo ,
     
 
     const totalOfQuestions = [5,10,15,20];
-    const difficulties =["Easy", "Medium", "Hard"]
+    const difficulties =["easy", "medium", "hard"]
 
     //to make first letter capital on the select bar strings or anything
     const capitalizeFirstLetter = (string: string) =>{
@@ -95,8 +95,7 @@ export const Settings = ({ modalInfo ,
                         </span>
                         <select 
                             value={difficulty} 
-                            onChange={(e) => setDifficulty(e.
-                            target.value)}
+                            onChange={(e) => setDifficulty(e.target.value)}
                             className="w-full p-2 border
                             border-gray-300 rounded-md"
                             >

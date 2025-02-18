@@ -146,7 +146,7 @@ export function GamePage (){
                           </div>
 
 
-                          <div className="text-white text-xl font-bold mt-4">
+                          <div className="text-white text-xl font-bold mt-4 ">
                             Question {currentQuestionIndex + 1} of {questions.length}
                           </div>
 
@@ -154,9 +154,9 @@ export function GamePage (){
                             {correctCategory}
                           </div>
 
-                          <div className="bg-white px-4 py-4 rounded-lg mt-6 text-lg">{questionText}</div>
+                          <div className="bg-white px-4 py-4 rounded-lg mt-6 text-lg mx-5">{questionText}</div>
 
-                          <div className="w-full flex flex-col max-w-2xl mt-4 gap-3">
+                          <div className="w-full flex flex-col max-w-2xl mt-4 gap-3 px-5 ">
                             {answers.map((answer,index) => {
                               let buttonClass = "bg-white text-gray-800"
 
