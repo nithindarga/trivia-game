@@ -6,6 +6,7 @@ import he from "he";
 import successAnimation from "../assets/lotties/triviasuccess.json"
 import failureAnimation from "../assets/lotties/triviafailure.json"
 import Lottie from "lottie-react";
+import { Rank } from "../components/rank";
 
 
 export function GamePage (){
@@ -13,11 +14,17 @@ export function GamePage (){
     const { questions ,settings } = location.state || {};
     const [score, setScore] = useState(0)
     const navigate= useNavigate()
+    const [rankModalInfo, setRankModalInfo] = useState(false)
 
     const [currentQuestionIndex , setCurrentQuestionIndex] = useState(0);
     const [answers,setAnswers] = useState<string[]>([]);
     const [selectedAnswer, setSelectedAnswer] = useState("")
     const [answerResult, setAnswerResult] = useState<"success" |"failure" | null>(null);
+
+    const handleRankModal = () =>{
+      setRankModalInfo(true);
+  
+    };
 
     useEffect(() => {
       if (questions && questions.length > 0){
@@ -106,7 +113,7 @@ export function GamePage (){
     const currentQuestion = questions[currentQuestionIndex]
     const questionText= he.decode(currentQuestion.question)
     const correctAnswer = he.decode(currentQuestion.correct_answer)
-    
+    const correctCategory = he.decode(currentQuestion.category)
 
 
 
@@ -118,7 +125,7 @@ export function GamePage (){
                           flex flex-row items-center justify-between px-6
                           text-white">
                             <div className="flex flex-col justify-center items-center gap-1
-                            cursor-pointer">
+                            cursor-pointer" onClick={handleRankModal}>
                               <PiRanking size ={30} 
                               />
                               <div>Rank</div>
@@ -144,7 +151,7 @@ export function GamePage (){
                           </div>
 
                           <div className="mt-4 text-2xl text-white">
-                            {currentQuestion.category}
+                            {correctCategory}
                           </div>
 
                           <div className="bg-white px-4 py-4 rounded-lg mt-6 text-lg">{questionText}</div>
@@ -206,7 +213,7 @@ export function GamePage (){
                             )
                           }
            
-                          
+                          <Rank modalInfo={rankModalInfo} setModalInfo={setRankModalInfo}/>
         </div>
     )
 }
