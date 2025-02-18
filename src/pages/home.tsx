@@ -10,7 +10,7 @@ import { PiRanking } from "react-icons/pi";
 import { Settings } from "../components/settings";
 import { useNavigate } from "react-router-dom";
 import { Rank } from "../components/rank";
-
+// import startSound from "../assets/sounds/startSound.mp3"
 
 export const HomePage =() => {
     const [stepPage, setStepPage] = useState(1)
@@ -58,6 +58,9 @@ export const HomePage =() => {
   
     };
     const handleStartGame = async () =>{
+        // const sound = new Audio(startSound)
+        // sound.play()
+
         setFirstAnimation(2)
         const params = new URLSearchParams();
         params.append("amount",numberOfQuestions.toString())
@@ -111,8 +114,9 @@ export const HomePage =() => {
                 <div className="text-3xl font-bold text-center flex 
                   flex-col justify-center items-center curser-pointer" onClick=
                   {handleStep}>
-                  <span className="typing-text text-white">
-                  Let's play a Trivia Game?!
+                  <span className="typing-text  text-white">
+                  Let's play a Quiz Game?!
+                  {/* Ready to challenge your mind? Let's play a Quiz! */}
                   </span>
                   <Lottie animationData={lottieGo} 
                   loop ={true} className="w-28"/>
@@ -163,7 +167,7 @@ export const HomePage =() => {
                 }
                 
                 <div  className="text-3xl font-bold text-white">
-                    Click to start</div>
+                    Click to Start</div>
               </div>
               </>
             )

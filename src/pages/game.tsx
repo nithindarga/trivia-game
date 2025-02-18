@@ -7,7 +7,8 @@ import successAnimation from "../assets/lotties/triviasuccess.json"
 import failureAnimation from "../assets/lotties/triviafailure.json"
 import Lottie from "lottie-react";
 import { Rank } from "../components/rank";
-
+// import successSound from "../assets/sounds/successSound.mp3"
+// import wrongSound from "../assets/sounds/wrongSound.mp3"
 
 export function GamePage (){
     const location = useLocation()
@@ -67,8 +68,10 @@ export function GamePage (){
       if (selectedAnswer === correctAnswer) {
         setScore((prevScore) => prevScore +1);
         setAnswerResult("success")
+        // playSuccessSound()
       } else {
         setAnswerResult("failure")
+        // playWrongSound()
       }
 
       setTimeout(() => {
@@ -115,6 +118,16 @@ export function GamePage (){
     const correctAnswer = he.decode(currentQuestion.correct_answer)
     const correctCategory = he.decode(currentQuestion.category)
 
+    // const playSuccessSound = () => {
+    //   const sound = new Audio(successSound)
+    //   sound.play();
+    // }
+    // const playWrongSound = () => {
+    //   const sound = new Audio(wrongSound)
+    //   sound.play();
+    // }
+
+
 
 
     return(
@@ -156,7 +169,7 @@ export function GamePage (){
 
                           <div className="bg-white px-6 py-6 rounded-lg mt-6 text-2xl font-semibold text-gray-800 leading-snug mx-3">{questionText}</div>
                           {/* "bg-white px-4 py-4 rounded-lg mt-6 text-lg mx-5"original question text style  */}
-                          
+
                           <div className="w-full flex flex-col max-w-2xl mt-4 gap-3 px-5 ">
                             {answers.map((answer,index) => {
                               let buttonClass = "bg-white text-gray-800"
