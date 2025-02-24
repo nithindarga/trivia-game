@@ -7,8 +7,8 @@ import successAnimation from "../assets/lotties/triviasuccess.json"
 import failureAnimation from "../assets/lotties/triviafailure.json"
 import Lottie from "lottie-react";
 import { Rank } from "../components/rank";
-// import successSound from "../assets/sounds/successSound.mp3"
-// import wrongSound from "../assets/sounds/wrongSound.mp3"
+import successSound2 from "../assets/sounds/successSound2.mp3"
+import wrongSound2 from "../assets/sounds/wrongSound2.mp3"
 
 export function GamePage (){
     const location = useLocation()
@@ -34,6 +34,9 @@ export function GamePage (){
         setAnswers(decodedQuestion);
       }
     }, [currentQuestionIndex, questions]);
+
+    
+    
 
     const decodeAndShuffleAnswers = (question: { 
         correct_answer: string; 
@@ -68,10 +71,10 @@ export function GamePage (){
       if (selectedAnswer === correctAnswer) {
         setScore((prevScore) => prevScore +1);
         setAnswerResult("success")
-        // playSuccessSound()
+        playSuccessSound()
       } else {
         setAnswerResult("failure")
-        // playWrongSound()
+        playWrongSound()
       }
 
       setTimeout(() => {
@@ -118,14 +121,15 @@ export function GamePage (){
     const correctAnswer = he.decode(currentQuestion.correct_answer)
     const correctCategory = he.decode(currentQuestion.category)
 
-    // const playSuccessSound = () => {
-    //   const sound = new Audio(successSound)
-    //   sound.play();
-    // }
-    // const playWrongSound = () => {
-    //   const sound = new Audio(wrongSound)
-    //   sound.play();
-    // }
+    //play sound 
+    const playSuccessSound = () => {
+      const sound = new Audio(successSound2)
+      sound.play();
+    }
+    const playWrongSound = () => {
+      const sound = new Audio(wrongSound2)
+      sound.play();
+    }
 
 
 

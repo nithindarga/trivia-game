@@ -10,7 +10,7 @@ import { PiRanking } from "react-icons/pi";
 import { Settings } from "../components/settings";
 import { useNavigate } from "react-router-dom";
 import { Rank } from "../components/rank";
-// import startSound from "../assets/sounds/startSound.mp3"
+import startSound from "../assets/sounds/startSound.mp3"
 
 export const HomePage =() => {
     const [stepPage, setStepPage] = useState(1)
@@ -58,8 +58,8 @@ export const HomePage =() => {
   
     };
     const handleStartGame = async () =>{
-        // const sound = new Audio(startSound)
-        // sound.play()
+        const sound = new Audio(startSound)
+        sound.play()
 
         setFirstAnimation(2)
         const params = new URLSearchParams();
